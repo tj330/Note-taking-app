@@ -1,0 +1,42 @@
+.nav-bar{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.greeting{
+    padding: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family:monospace;
+    font-size: 30px;
+}
+.greeting .user{
+    color: var(--secondary);
+}
+.profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding: 0 1cqi;
+    border-radius: 50px;
+    background-color: var(--primary);
+    cursor: pointer;
+}
+.profile p{
+    margin-right: 5px;
+}
+.profile-pic{
+    height: 40px;
+    border-radius: 20px;
+}
+@media only screen and (max-width: 668px){
+    .greeting{
+        font-size: 15px;
+    }
+    .nav-username{
+        display: none;
+    }
+}

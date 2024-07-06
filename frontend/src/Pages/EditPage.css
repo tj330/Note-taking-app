@@ -1,0 +1,50 @@
+.edit{
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    padding: 10px;
+}
+.edit .edit-input{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.edit-input input{
+    flex: 1;
+    min-width: 340px;
+    max-width: 800px;
+    font-size: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding:10px;
+    border: 2px solid var(--primary);
+    border-radius: 50px;
+}
+.edit-input input:focus{
+    outline-color: var(--secondary);
+}
+.edit-input .button{
+    margin-left: 5px;
+    text-decoration: none;
+    padding:10px;
+    border-radius: 30px;
+    color: black;
+}
+.edit-textarea{
+    margin: 10px;
+}
+.edit-textarea textarea{
+    width: 90%;
+    min-width: 350px;
+    min-height: 400px;
+    max-height: 900px;
+    box-sizing: border-box;
+    resize: none;
+    padding: 10px;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 10px;
+    border: 2px solid var(--primary);
+}
+.edit-textarea textarea:focus{
+    outline: 1px solid var(--secondary);
+}

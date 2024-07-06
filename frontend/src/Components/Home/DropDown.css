@@ -1,0 +1,27 @@
+.drop-down{
+    position: absolute;
+    background-color: var(--primary);
+    top: 6rem;
+    right: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.drop-down .link{
+    text-decoration: none;
+    color: black;
+}
+.drop-down .link img{
+    height: 25px;
+}
+.drop-down .link p{
+    margin: 0;
+}
+.drop-down .link .link-component{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}

@@ -1,0 +1,32 @@
+.notebook{
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 10px));
+}
+.notebook-add{
+    text-decoration: none;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--primary);
+    background-color: var(--secondary);
+    cursor: pointer;
+}
+.notebook-add img{
+    height: 30px;
+}
+@media only screen and (max-width: 768px){
+    .notebook-add{
+        font-size: 14px;
+    }
+}
