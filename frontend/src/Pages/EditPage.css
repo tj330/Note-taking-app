@@ -22,11 +22,13 @@
 .edit-input input:focus{
     outline-color: var(--secondary);
 }
-.edit-input .button{
+.edit-input button{
+    background-color: transparent;
     margin-left: 5px;
     text-decoration: none;
     padding:10px;
     border-radius: 30px;
+    border: none;
     color: black;
 }
 .edit-textarea{

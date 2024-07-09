@@ -1,21 +1,19 @@
-import { details } from "../data";
-
 const initialState={
     isLogged:false,
-    user:details.user
+    user:{},
+    token:""
 }
 
 const userReducer=(state=initialState,action)=>{
-    console.log(state)
     switch(action.type){
         case "USER-FETCH":
             return {
                 ...state,
                 isLogged:true,
                 user:{
-                    username:action.username,
-                    profile:action.profile
-                }
+                    username:action.payload.username,
+                },
+                token:action.payload.token
             }
         case "USER-LOGOUT":
             console.log(state)
@@ -25,7 +23,6 @@ const userReducer=(state=initialState,action)=>{
                 user:{
                     ...state.user,
                     username:"",
-                    profile:""
                 },
             }
         default:

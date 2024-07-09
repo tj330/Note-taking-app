@@ -10,7 +10,7 @@ function LoginPage() {
             Wana Take <span style={{ color: `#737477` }}>note?</span>{" "}
           </h2>
         </div>
-        <Form type="Login" route="/api/token/" />
+        <Form type="Login" route="/api/user/login" />
       </div>
     </div>
   );

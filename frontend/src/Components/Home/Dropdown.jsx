@@ -1,34 +1,39 @@
 import React from "react";
 import "./DropDown.css";
-import { Link } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { dev, logout, selfedit } from "../../assets/icons/logo";
+import { useNavigate } from "react-router-dom";
 
 function Dropdown() {
 
   const dispatch=useDispatch()
+  const navigate=useNavigate()
 
   return (
     <div className="drop-down">
-      <Link to={"/edit"} className="link">
+      <button  className="link" disabled onClick={()=>navigate("/edit")}>
         <div className="link-component">
           <img src={selfedit} alt="edit" />
           <p>Edit Profile</p>
         </div>
-      </Link>
-      <Link to={"/login"} className="link">
-      <div className='link-component' onClick={()=>dispatch({type:"USER-LOGOUT"})}>
+      </button>
+      <button  className="link" onClick={()=>{
+        dispatch({type:"USER-LOGOUT"})
+        navigate("/login")
+        }}>
+      <div className='link-component' >
                 <img src={logout} alt="edit" />
                 <p>Logout</p>
             </div>
-      </Link>
+      </button>
       <br />
-      <Link to={"/dev"} className="link">
+      <button  className="link" onClick={()=>navigate("/dev")} disabled>
         <div className="link-component">
           <img src={dev} alt="edit" />
           <p>Contact Devs</p>
         </div>
-      </Link>
+      </button>
     </div>
   );
 }

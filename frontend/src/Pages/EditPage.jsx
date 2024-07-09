@@ -1,29 +1,23 @@
 import React from "react";
 import "./EditPage.css";
 import Navbar from "../Components/Home/NavBar";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
 import { useNavigate} from 'react-router-dom';
-import api from "../api";
-
+import api from "../../api";
 
 function EditPage() {
 
   const dispatch = useDispatch();
   const navigate=useNavigate()
+  const {title,content}=useSelector((state)=>state.note.newNote)
 
   const createNote=()=>{
-    const {title,content}=useSelector((state)=>state.note.newNote)
-    const note=useSelector((state)=>state.note.note)
-
-    api.post("/api/notes/",{
-      id:note.length,
-      title:title,
-      content:content
-    }).then((res)=>{
-      if(res.status===201) alert("Note created!")
-      else alert("Failed to make note")
-    }).catch((err)=>alert(err))
-    getNotes()
+    api.post("notes",{
+        title,
+        content
+      }).then((res)=>console.log(res))
+      .then(()=>navigate("/"))
+      .catch((err)=>console.log(err))
   }
 
   return (
@@ -41,7 +35,6 @@ function EditPage() {
           <button className="button"
            onClick={() => {
             createNote()
-            navigate("/")
           }}
           >
             Save

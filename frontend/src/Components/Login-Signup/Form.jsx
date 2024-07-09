@@ -1,39 +1,40 @@
 import "./Form.css"
-import {useRef, useState} from "react"
-import { Link ,useNavigate} from "react-router-dom"
+import axios from "axios"
+import {useRef} from "react"
 import { useDispatch } from "react-redux"
-import api from "../../api";
-import { ACCESS_TOKEN,REFRESH_TOKEN } from "../../constants";
+import { Link ,useNavigate} from "react-router-dom"
+import api from "../../../api"
 
 function Form({type,route}) {
 
     const navigate=useNavigate()
+    const dispatch=useDispatch()
 
-    const [loading,setLoading]=useState(false)
-
-    const onHandleChange= async (e)=>{
-        setLoading(true)
+    const onHandleChange=(e)=>{
+        const name=nameRef.current.value
         const email=emailRef.current.value
         const password=passwordRef.current.value
-        const name=nameRef.current.value
         e.preventDefault()
-        try{
-            if(type==="Login"){
-                const res= await api.post(route,{
-                    email,
-                    password
-                })
-                localStorage.setItem(ACCESS_TOKEN,res.data.access)
-                localStorage.setItem(REFRESH_TOKEN,res.data.refresh)
+        if(type==="Login"){
+        api.post("user/login",{
+                email:email,
+                password:password
+            }).then((res)=>res.data)
+            .then((data)=>{
+                console.log(data)
+                dispatch({type:"USER-FETCH",payload:{
+                    username:data.user,
+                    token:data.token
+                }},)
                 navigate("/")
-            }else if(type==="Sign Up"){
-                const res=await api.post(route,{name,email,password})
-                navigate("/login")
-            }
-        }catch(error){
-            alert(error)
-        }finally{
-            setLoading(false)
+            }).catch(err=>alert(err))
+        }else{
+            api.post("http://localhost:8000/api/user/signup",{
+                username:name,
+                email:email,
+                password:password
+            }).then(()=>navigate("/login"))
+            .catch((err)=>alert(err))
         }
     }
 
@@ -41,7 +42,6 @@ function Form({type,route}) {
     const passwordRef=useRef("")
     const emailRef=useRef("")
 
-    const dispatch=useDispatch()
 
     const isUser=type==="Login"
 

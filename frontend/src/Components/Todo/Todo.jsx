@@ -4,10 +4,11 @@ import {addCircle} from "../../assets/icons/logo"
 import TaskCard from './TaskCard'
 import {useDispatch} from "react-redux"
 import { useSelector } from 'react-redux'
-import api from "../../api"
+import api from '../../../api'
 
 function Todo() {
 
+   const todo=useSelector((state)=>state.todo.inputState)
    const dispatch=useDispatch()
 
   useEffect(()=>{
@@ -15,29 +16,22 @@ function Todo() {
   },[])
 
   const getTodo=()=>{
-    api.get("/api/todo/")
-    .then((res)=>res.data)
-    .then((data)=>dispatch({type:"TODO-FETCH",content:data}))
-    .catch((err)=>alert(err))
+    api.get("todo")
+      .then((res)=>res.data.data)
+      .then((data)=>dispatch({type:"TODO-FETCH",content:data}))
   }
 
   const deleteTodo=(id)=>{
-    api.delete(`/api/todo/delete/${id}`)
-    .then((res)=>{
-      if(res.status===204) alert("Todo Deleted Sucessfully")
-      else alert("Todo not deleted")
-    }).catch((err)=>alert(err))
-
-    getTodo()
+    api.delete(`todo/delete/${id}`)
+    .then(()=>getTodo())
+    .catch((err)=>console.log(err))
   }
 
   const createTodo=()=>{
-    const todo=useSelector((state)=>state.todo.inputState)
-    api.post("/api/todo/",{todo})
-    .then((res)=>{
-      if(res.status===201) alert("Todo Added")
-      else alert("Todo not Added")
+    api.post("todo",{
+      task:todo
     })
+    .then(()=>getTodo())
     .catch((err)=>alert(err))
 
     getTodo()
@@ -51,7 +45,7 @@ function Todo() {
         <button onClick={createTodo}><img src={addCircle} alt="add" /></button>
       </div>
       <div className='todo-elements'>
-        {todoC.todo.map((element)=><TaskCard data={element} key={element.id} delete={deleteTodo}/>)}
+        {todoC.todo.map((element)=><TaskCard data={element} key={element._id} delete={deleteTodo}/>)}
       </div>
     </div>
   )

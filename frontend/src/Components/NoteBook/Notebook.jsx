@@ -4,7 +4,7 @@ import { useSelector,useDispatch} from "react-redux";
 import { edit } from "../../assets/icons/logo";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import api from "../../api";
+import api from "../../../api";
 
 function Notebook() {
 
@@ -20,28 +20,24 @@ function Notebook() {
   },[])
 
   const getNotes=()=>{
-    api.get("/api/notes/")
-    .then((res)=>res.data)
+    api.get("notes")
+    .then((res)=>res.data.data)
     .then((data)=>dispatch({type:"NOTE-FETCH",content:data}))
-    .catch((err)=>alert(err))
+    .catch((err)=>console.log(err))
   }
 
   const deleteNote=(id)=>{
-    api.delete(`/api/notes/delete/${id}/`)
-    .then((res)=>{
-      if(res.status===204) alert("Note Deleted")
-      else alert("Failed to delete note")
-    })
-    .catch((err)=>alert(err))
-    getNotes()
+    api.delete(`notes/delete/${id}`)
+    .then(()=>getNotes())
+    .catch((err)=>console.log(err))
   }
 
 
   return (
     <>
       <div className="notebook">
-        {note?.map((note) => (
-          <Card details={note} key={note.id} color={colors[index]} delete={deleteNote}/>
+        {note.map((note) => (
+          <Card details={note} key={note._id} color={colors[index]} delete={deleteNote}/>
         ))}
       </div>
       <button className="notebook-add" onClick={()=>navigate("/edit")}>

@@ -9,6 +9,7 @@ import HomePage from "./Pages/HomePage.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import SignUpPage from "./Pages/SignUpPage.jsx";
 import ProtectedRoute from "./Components/Protected/ProtectedRoute.jsx"
+import EditPage from "./Pages/EditPage.jsx";
 
 function Logout(){
   localStorage.clear()
@@ -36,12 +37,18 @@ const router = createBrowserRouter([
     </ProtectedRoute>,
   },
   {
+    path:"/edit",
+    element:<ProtectedRoute>
+      <EditPage/>
+    </ProtectedRoute>
+  },
+  {
     path:"*",
     element:<ErrorPage/>
   }
 ]);
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     note: noteReducer,
     todo: todoReducer,

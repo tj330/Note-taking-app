@@ -8,9 +8,9 @@ function TaskCard(props) {
   return (
     <div className={`task-card ${isComplete?"complete":""}`} onClick={()=>setComplete(!isComplete)}>
         <div className="content">
-        <p >{props.data.todo}</p>
+        <p >{props.data.task}</p>
         </div>
-        <button onClick={()=>props.delete(props.id)}><img src={deleteicon} alt="" /></button>
+        <button onClick={()=>props.delete(props.data._id)}><img src={deleteicon} alt="" /></button>
     </div>
   )
 }

@@ -10,8 +10,11 @@
     gap: 15px;
 }
 .drop-down .link{
-    text-decoration: none;
+    border: none;
+    background-color: transparent;
     color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
 }
 .drop-down .link img{
     height: 25px;
